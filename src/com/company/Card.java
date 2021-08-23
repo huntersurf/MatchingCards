@@ -16,6 +16,7 @@ public class Card extends JLabel implements MouseListener {
     int iconHeightHalf;
     boolean mousePressed = false;
     CardController controller;
+    public static int size;
 
     public Card(CardController controller, Icon face, Icon back, int num) {
         super(back);
@@ -50,9 +51,10 @@ public class Card extends JLabel implements MouseListener {
     public void turnUp() {
         if(this.faceUp) return;
         // test purpose
-        this.faceUp = true;
+        //this.faceUp = true;
         this.faceUp = this.controller.turnUp(this);
         if(this.faceUp) {
+            size++;
             this.setIcon(this.faceIcon);
         }
     }

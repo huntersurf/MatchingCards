@@ -1,4 +1,5 @@
 package com.company;
+// Main class runs game
 
 public class Main {
 

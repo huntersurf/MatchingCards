@@ -3,6 +3,7 @@ package com.company;
 
 import javax.imageio.ImageReader;
 import javax.swing.*;
+import javax.swing.plaf.PopupMenuUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -128,9 +129,28 @@ public class MatchingGame implements ActionListener {
         this.mainFrame.setVisible(true);
     }
 
+    public void gameWin() {
+        CardController controller = new CardController();
+        JPopupMenu popup = new JPopupMenu();
+        popup.setSize(300,300);
+        popup.setEnabled(true);
+        popup.setLabel("You completed the matching game in " + controller.getNumTries() + "moves!");
+        JButton buttonOne = new JButton("New Game");
+        JButton buttonTwo = new JButton("Exit");
+        popup.add(buttonOne);
+        popup.add(buttonTwo);
+        if(controller.getPairs() >4) {
+            popup.show(mainFrame, mainFrame.getX(), mainFrame.getY());
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("New Game")) newGame();
         if(e.getActionCommand().equals("Exit")) System.exit(0);
+        CardController controller = new CardController();
+        if(controller.getPairs() > 2) {
+            gameWin();
+        }
     }
 }
